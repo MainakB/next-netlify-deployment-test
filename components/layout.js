@@ -1,11 +1,24 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from './layout.module.css'
-import utilStyles from '../styles/utils.module.css'
-import Link from 'next/link'
+import Head from "next/head";
+// import Image from "next/image";
+import styles from "./layout.module.css";
+import utilStyles from "../styles/utils.module.css";
+import Link from "next/link";
 
-const name = '[Your Name]'
-export const siteTitle = 'Next.js Sample Website'
+const name = "[Your Name]";
+export const siteTitle = "Next.js Sample Website";
+
+function GetProfileImage(height, width) {
+  const imgSrc = require("../public/images/profile.jpg");
+  return (
+    <img
+      src={imgSrc}
+      className={utilStyles.borderCircle}
+      height={height}
+      width={width}
+      alt={name}
+    />
+  );
+}
 
 export default function Layout({ children, home }) {
   return (
@@ -28,29 +41,13 @@ export default function Layout({ children, home }) {
       <header className={styles.header}>
         {home ? (
           <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
+            {GetProfileImage(144, 144)}
             <h1 className={utilStyles.heading2Xl}>{name}</h1>
           </>
         ) : (
           <>
             <Link href="/">
-              <a>
-                <Image
-                  priority
-                  src="/images/profile.jpg"
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
+              <a>{GetProfileImage(108, 108)}</a>
             </Link>
             <h2 className={utilStyles.headingLg}>
               <Link href="/">
@@ -69,5 +66,5 @@ export default function Layout({ children, home }) {
         </div>
       )}
     </div>
-  )
+  );
 }
